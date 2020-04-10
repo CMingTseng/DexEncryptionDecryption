@@ -1,7 +1,7 @@
 package com.example.proxy_tools;
 
 import com.gmail.yang1001yk.utils.DexUtils;
-import com.gmail.yang1001yk.utils.EncryptUtil;
+import com.gmail.yang1001yk.utils.EncryptPKCS7Tool;
 import com.gmail.yang1001yk.utils.Zip;
 
 import java.io.File;
@@ -118,9 +118,11 @@ public class Main {
         });
         //AES加密了
 //        AES.init(AES.DEFAULT_PWD);
+        EncryptPKCS7Tool encrypttool = new EncryptPKCS7Tool();
         for (File dexFile : dexFiles) {
             byte[] bytes = DexUtils.getBytes(dexFile);
-            byte[] encrypt = EncryptUtil.encrypt(bytes, EncryptUtil.ivBytes);
+//            byte[] encrypt = EncryptUtil.encrypt(bytes, EncryptUtil.ivBytes);
+            byte[] encrypt = encrypttool.encrypt(bytes);
             FileOutputStream fos = new FileOutputStream(new File(apkTemp,
                     "secret-" + dexFile.getName()));
             fos.write(encrypt);
